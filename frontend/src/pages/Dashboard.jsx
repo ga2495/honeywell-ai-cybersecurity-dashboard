@@ -15,7 +15,7 @@ function Dashboard() {
     total_events: 0,
     threats: 0,
     critical: 0,
-    risk: "Low",
+    risk: "LOW",
   });
 
   const [predictions, setPredictions] = useState([]);
@@ -26,10 +26,26 @@ function Dashboard() {
 
   const loadStats = async () => {
     try {
+      console.log("Fetching stats...");
+
       const res = await api.get("/stats");
-      setStats(res.data);
+
+      console.log("Stats Response:", res.data);
+
+      setStats({
+        total_events: res.data.total_events,
+        threats: res.data.threats,
+        critical: res.data.critical,
+        risk: res.data.risk,
+      });
     } catch (err) {
-      console.error(err);
+      console.error("Stats Error:", err);
+
+      alert(
+        err.response
+          ? JSON.stringify(err.response.data)
+          : err.message
+      );
     }
   };
 
@@ -74,20 +90,8 @@ function Dashboard() {
 
         <div style={{ padding: "30px" }}>
           <div style={{ marginBottom: 30 }}>
-            <h1
-              style={{
-                marginBottom: 5,
-                color: "#0f172a",
-              }}
-            >
-              Honeywell AI Cybersecurity Dashboard
-            </h1>
-
-            <p
-              style={{
-                color: "#64748b",
-              }}
-            >
+            <h1>Honeywell AI Cybersecurity Dashboard</h1>
+            <p style={{ color: "#64748b" }}>
               AI Powered Behavioral Threat Detection System
             </p>
           </div>
@@ -141,7 +145,6 @@ function Dashboard() {
               }}
             >
               <h2>Threat Timeline</h2>
-
               <ThreatTimelineChart predictions={predictions} />
             </div>
 
@@ -154,7 +157,6 @@ function Dashboard() {
               }}
             >
               <h2>Attack Distribution</h2>
-
               <AttackDistributionChart predictions={predictions} />
             </div>
           </div>
@@ -169,7 +171,6 @@ function Dashboard() {
             }}
           >
             <h2>AI Threat Prediction</h2>
-
             <PredictionForm onPrediction={handlePrediction} />
           </div>
 
@@ -184,7 +185,6 @@ function Dashboard() {
             }}
           >
             <h2>Live Threat Feed</h2>
-
             <ThreatTable predictions={predictions} />
           </div>
         </div>
