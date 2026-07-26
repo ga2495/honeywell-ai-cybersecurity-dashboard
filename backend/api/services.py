@@ -2,9 +2,10 @@ import joblib
 import pandas as pd
 
 # Load models
-xgb_model = joblib.load("backend/data/models/xgboost.pkl")
-if_model = joblib.load("backend/data/models/isolation_forest.pkl")
-label_encoder = joblib.load("backend/data/models/xgb_label_encoder.pkl")
+xgb_model = joblib.load("data/models/xgboost.pkl")
+if_model = joblib.load("data/models/isolation_forest.pkl")
+label_encoder = joblib.load("data/models/xgb_label_encoder.pkl")
+
 
 
 def predict_threat(data: dict):
