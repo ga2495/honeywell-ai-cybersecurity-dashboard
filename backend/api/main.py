@@ -12,6 +12,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://honeywell-ai-cybersecurity-dashboard.vercel.app",
+        "https://honeywell-ai-cybersecurity-dashboard-bntjw32n2.vercel.app",
+        "https://honeywell-ai-cybersecurity-da-git-77a112-guptaaman88732gmailcom.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
