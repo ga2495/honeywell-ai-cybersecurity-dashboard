@@ -2,11 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routes import router
 
-app = FastAPI()
+app = FastAPI(
+    title="Honeywell AI Threat Detection API",
+    version="1.0.0"
+)
 
+# REPLACE THIS WHOLE BLOCK
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
